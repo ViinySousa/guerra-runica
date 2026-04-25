@@ -1,0 +1,682 @@
+/* ══════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2.5rem; /* Ajustado levemente para uma altura mais elegante */
+  
+  /* Mudança: De gradiente para cor sólida preta */
+  background: var(--color-black); 
+  
+  /* Mudança: Borda inferior um pouco mais definida para o efeito dourado */
+  border-bottom: 1px solid rgba(201, 168, 76, 0.3); 
+  
+  transition: background var(--transition-smooth);
+}
+
+.navbar.scrolled {
+  background: rgba(10, 6, 8, 0.97);
+  border-bottom-color: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar__logo-icon {
+  font-size: 1.5rem;
+  color: var(--color-purple-glow);
+  text-shadow: var(--glow-purple);
+  line-height: 1;
+}
+
+.navbar__logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.navbar__logo-img {
+  width: 45px; 
+  height: auto;
+}
+
+.navbar__logo-small {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.navbar__logo-main {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  
+  /* Adicione estas 3 linhas para forçar o centro perfeito */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar__link {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold); /* Modificado de white-dim para gold */
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width var(--transition-smooth);
+}
+
+.navbar__link:hover {
+  color: var(--color-gold-light);
+}
+
+.navbar__link:hover::after {
+  width: 100%;
+}
+
+.navbar__social {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.navbar__social-link {
+  color: var(--color-gold); /* Modificado de white-dim para gold */
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.navbar__social-link:hover {
+  color: var(--color-gold-light); /* Modificado de purple-glow para gold-light */
+  transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--color-black);
+}
+
+/* Background */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que o vídeo cubra a tela toda */
+  object-position: center;
+  /* Mantendo o clima cinematográfico que ajustamos */
+  filter: brightness(0.4) contrast(1); 
+}
+
+
+
+/* Partículas */
+.hero__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--color-purple-glow);
+  border-radius: 50%;
+  box-shadow: var(--glow-purple);
+  animation: particle-float linear infinite;
+  opacity: 0;
+}
+
+.particle:nth-child(1) { left: 15%; animation-duration: 8s;  animation-delay: 0s;   top: 70%; }
+.particle:nth-child(2) { left: 35%; animation-duration: 11s; animation-delay: 2s;   top: 80%; }
+.particle:nth-child(3) { left: 55%; animation-duration: 9s;  animation-delay: 1s;   top: 75%; }
+.particle:nth-child(4) { left: 72%; animation-duration: 13s; animation-delay: 3s;   top: 85%; }
+.particle:nth-child(5) { left: 88%; animation-duration: 10s; animation-delay: 0.5s; top: 65%; }
+
+@keyframes particle-float {
+  0%   { opacity: 0; transform: translateY(0) scale(1); }
+  10%  { opacity: 1; }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-400px) scale(0.3); }
+}
+
+/* Conteúdo */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  animation: hero-reveal 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+}
+
+@keyframes hero-reveal {
+  0%   { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero__ornament {
+  font-size: 1rem;
+  color: var(--color-gold);
+  text-shadow: var(--glow-gold);
+  letter-spacing: 1rem;
+  animation: ornament-pulse 3s ease-in-out infinite;
+}
+
+@keyframes ornament-pulse {
+  0%, 100% { opacity: 0.7; text-shadow: var(--glow-gold); }
+  50%       { opacity: 1;   text-shadow: 0 0 30px rgba(201,168,76,0.8), 0 0 60px rgba(201,168,76,0.4); }
+}
+
+.hero__pretitle {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: capitalize;
+  color: var(--color-gold);
+  text-shadow: var(--glow-gold);
+}
+
+.hero__title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.9;
+  
+  /* Adicionamos drop-shadow aqui para dar profundidade ao texto com máscara */
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.8)) drop-shadow(0px 0px 20px rgba(201, 168, 76, 0.3));
+}
+
+.hero__title-line {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 8rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  
+  /* Removemos o text-shadow daqui pois ele conflita com text-fill-color transparent */
+  
+  /* Substituímos o gradiente pela imagem de textura */
+  background: url('../images/textura-ouro.jpg') center/cover no-repeat;
+  
+  /* Máscara de texto para o fundo aparecer apenas dentro das letras */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+}
+
+/* A linha horizontal dourada */
+.hero__divider {
+  position: relative;
+  width: 100%;
+  max-width: 450px; /* Controla a largura máxima da linha */
+  height: 1px;
+  /* Cria o efeito da linha sumindo nas bordas e forte no meio */
+  background: linear-gradient(
+    90deg, 
+    transparent 0%, 
+    rgba(201, 168, 76, 0.8) 50%, /* Nossa cor gold */
+    transparent 100%
+  );
+  /* Ajuste das margens para aproximar os elementos */
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem; /* Reduzido de 1.5rem para aproximar do subtítulo */
+  margin-left: 0;
+  margin-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* O losango central brilhante */
+.hero__divider::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  /* Rotaciona um quadrado em 45 graus para virar um losango */
+  transform: rotate(45deg);
+  
+  /* Cor interna roxa e borda dourada */
+  background: #3D1A6E; /* Roxo médio */
+  border: 1px solid #C9A84C; /* Dourado */
+  
+  /* O brilho (glow) roxo ao redor do losango */
+  box-shadow: 0 0 12px 2px rgba(192, 132, 252, 0.7);
+}
+
+.hero__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #9c7257;
+  line-height: 1.5;
+  max-width: 480px;
+  letter-spacing: 0.02em;
+}
+
+/* CTA Button */
+/* Container principal do botão (fundo dourado que servirá de borda) */
+.hero__cta {
+  position: relative;
+  padding: 1.2rem 4rem;
+  margin-top: 2rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #F5F0E8;
+  text-shadow: 0 0 10px rgba(245, 240, 232, 0.4);
+  
+  /* Gradiente dourado que forma a borda externa */
+  background: linear-gradient(90deg, #5c4316, #C9A84C, #5c4316);
+  
+  /* A tesoura: corta as laterais em formato de seta/chanfro */
+  clip-path: polygon(1.5rem 0, calc(100% - 1.5rem) 0, 100% 50%, calc(100% - 1.5rem) 100%, 1.5rem 100%, 0 50%);
+  
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, filter 0.3s ease;
+  z-index: 1; /* Cria um contexto de empilhamento */
+}
+
+/* O "miolo" escuro do botão, ligeiramente menor para revelar o dourado do fundo */
+.hero__cta::before {
+  content: '';
+  position: absolute;
+  /* Os 2px aqui definem a espessura da borda dourada */
+  top: 2px; left: 2px; right: 2px; bottom: 2px; 
+  
+  /* Fundo roxo muito escuro */
+  background: linear-gradient(180deg, #1a082b 0%, #3d1566 100%);
+  
+  /* Mesma tesoura, mas ajustada para caber dentro */
+  clip-path: polygon(calc(1.5rem - 1px) 0, calc(100% - (1.5rem - 1px)) 0, 100% 50%, calc(100% - (1.5rem - 1px)) 100%, calc(1.5rem - 1px) 100%, 0 50%);
+  z-index: -1; /* Joga pro fundo, mas atrás do texto */
+}
+
+/* Os pontos de luz roxa (glow) no centro do topo e da base */
+.hero__cta::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  /* Cria duas esferas de luz brilhantes */
+  background: 
+    radial-gradient(ellipse at 50% 0%, rgba(220, 100, 255, 0.8) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(220, 100, 255, 0.8) 0%, transparent 60%);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.hero__cta:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+.hero__cta:hover::after {
+  opacity: 1; /* Brilha mais forte no hover */
+}
+
+.hero__cta:active {
+  transform: scale(0.98);
+}
+
+/* Scroll indicator */
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: scroll-fade 2s ease-in-out 2s both;
+}
+
+@keyframes scroll-fade {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.hero__scroll-mouse {
+  width: 22px;
+  height: 36px;
+  border: 1.5px solid rgba(201, 168, 76, 0.4);
+  border-radius: 11px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.hero__scroll-wheel {
+  width: 3px;
+  height: 7px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  animation: scroll-wheel 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-wheel {
+  0%   { transform: translateY(0);   opacity: 1; }
+  80%  { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0);   opacity: 0; }
+}
+
+.hero__scroll-label {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.5);
+}
+
+/* ══════════════════════════════════════════
+   MODAL — Carta de Thorin
+══════════════════════════════════════════ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+}
+
+.modal.active {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 6, 8, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+.modal__container {
+  position: relative;
+  z-index: 1;
+  width: min(680px, 90vw);
+  max-height: 85vh;
+  overflow-y: auto;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(26, 10, 46, 0.97) 0%,
+      rgba(13, 8, 18, 0.99) 100%
+    );
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 3rem 3.5rem;
+  text-align: center;
+  box-shadow:
+    0 0 60px rgba(139, 47, 201, 0.3),
+    inset 0 0 80px rgba(61, 26, 110, 0.1);
+
+  /* 1. Definimos que o ponto de ancoragem da animação é o topo do elemento */
+  transform-origin: top center;
+  
+  /* 2. Estado inicial (Fechado): 
+     - perspective(1200px): Cria o ambiente 3D.
+     - rotateX(-60deg): Inclina o fundo da carta para trás, sumindo.
+     - scaleY(0): A carta está completamente enrolada.
+     - translateY(-40px): A carta começa um pouco mais alta. */
+  transform: perspective(1200px) rotateX(-60deg) scaleY(0) translateY(-40px);
+  
+  /* A opacidade do container também começa em 0 */
+  opacity: 0;
+  
+  /* 3. A transição: Usamos 'ease-in' para fechar rápido, mas na volta usaremos outro tempo */
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+
+  /* Scrollbar personalizada */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,168,76,0.3) transparent;
+}
+
+.modal.active .modal__container {
+  /* Estado Final (Aberto): Totalmente visível, sem rotação e tamanho original */
+  transform: perspective(1200px) rotateX(0deg) scaleY(1) translateY(0);
+  opacity: 1;
+  
+  /* 4. A Mágica do Quique: O cubic-bezier(0.34, 1.56, 0.64, 1) faz a carta 
+     descer, passar um pouquinho do limite, e voltar, como um papel pesado se abrindo! */
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease-out;
+}
+
+.modal__container::-webkit-scrollbar { width: 4px; }
+.modal__container::-webkit-scrollbar-thumb {
+  background: rgba(201,168,76,0.3);
+  border-radius: 2px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: rgba(245, 240, 232, 0.4);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  background: none;
+  border: none;
+  line-height: 1;
+}
+
+.modal__close:hover {
+  color: var(--color-gold);
+}
+
+.modal__ornament {
+  font-size: 1rem;
+  color: var(--color-gold);
+  text-shadow: var(--glow-gold);
+  margin-bottom: 0.75rem;
+}
+
+.modal__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+  text-shadow: var(--glow-gold);
+  margin-bottom: 1.25rem;
+}
+
+.modal__divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold),
+    transparent
+  );
+  margin: 0 auto 2rem;
+}
+
+.modal__body {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal__body p {
+  font-family: var(--font-body);
+  font-size: clamp(0.875rem, 1.5vw, 0.95rem);
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--color-white-dim);
+}
+
+.modal__signature {
+  font-family: var(--font-display) !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.08em;
+  color: var(--color-gold) !important;
+  text-align: right;
+  margin-top: 0.5rem;
+  text-shadow: var(--glow-gold);
+}
+
+/* Esconde os elementos internos inicialmente */
+.modal__title,
+.modal__divider,
+.modal__body,
+.modal__ornament {
+  opacity: 0;
+  transform: translateY(15px); /* Joga o texto um pouco pra baixo */
+  transition: opacity 0s, transform 0s; /* Reseta quando fecha */
+}
+
+/* Quando o modal fica ativo, anima os elementos internos com um atraso (delay) */
+.modal.active .modal__ornament {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+}
+
+.modal.active .modal__title {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.modal.active .modal__divider {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+}
+
+.modal.active .modal__body {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+}
+
+/* ══════════════════════════════════════════
+   CONTROLE DE ÁUDIO DO HERO
+══════════════════════════════════════════ */
+
+.hero__audio-btn {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: var(--z-overlay); /* Garante que fique clicável por cima do vídeo */
+  background: rgba(10, 6, 8, 0.6);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.hero__audio-btn:hover {
+  border-color: var(--color-gold);
+  background: rgba(10, 6, 8, 0.9);
+  transform: scale(1.1);
+  box-shadow: var(--glow-gold);
+}
+
+/* Responsividade: mover um pouco em telas de celular */
+@media (max-width: 768px) {
+  .hero__audio-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+  }
+}
