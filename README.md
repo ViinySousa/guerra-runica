@@ -17,4 +17,4 @@ Depois de cinco meses daquela emboscada brutal onde quase não sobrevivemos, e g
 
 
 ---
-Desenvolvido com ☕ e 🎲 para o melhor grupo de aventureiros de Faerûn.
+Desenvolvido com ☕ para o melhor grupo de aventureiros de Faerûn.
