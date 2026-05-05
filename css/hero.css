@@ -253,7 +253,7 @@
 .hero__title-line {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 7vw, 8rem);
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: capitalize;

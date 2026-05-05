@@ -22,13 +22,19 @@ function fecharCarta() {
   document.body.style.overflow = '';
 }
 
-btnCarta.addEventListener('click', abrirCarta);
-btnClose.addEventListener('click', fecharCarta);
-backdrop.addEventListener('click', fecharCarta);
+if (btnCarta) {
+  btnCarta.addEventListener('click', abrirCarta);
+}
+if (btnClose) {
+  btnClose.addEventListener('click', fecharCarta);
+}
+if (backdrop) {
+  backdrop.addEventListener('click', fecharCarta);
+}
 
 // Fechar com tecla ESC
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal.classList.contains('active')) {
+  if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
     fecharCarta();
   }
 });
@@ -61,4 +67,27 @@ if (btnAudioToggle && videoBg) {
       btnAudioToggle.style.color = 'var(--color-purple-glow)'; 
     }
   });
+}
+
+// ─── Animação de Scroll (Intersection Observer) ─────────────────────
+const fadeElements = document.querySelectorAll('.fade-in-scroll');
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      // Caso queira que a animação aconteça apenas uma vez, descomente a linha abaixo:
+      // fadeObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+fadeElements.forEach(el => fadeObserver.observe(el));
+
+// Adiciona a escuta de evento para o botão do footer abrir a mesma carta do Hero
+const btnFooterCarta = document.getElementById('btnFooterCarta');
+if (btnFooterCarta && typeof abrirCarta === 'function') {
+  btnFooterCarta.addEventListener('click', abrirCarta);
 }

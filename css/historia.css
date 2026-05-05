@@ -1,0 +1,586 @@
+/* ══════════════════════════════════════════
+   HERO DA PÁGINA "A HISTÓRIA"
+══════════════════════════════════════════ */
+
+.hero-hist {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  
+  background: url('../images/hero-hist.jpg') center/cover no-repeat;
+  background-color: var(--color-black);
+  overflow: hidden;
+}
+
+/* Escurece levemente a imagem para garantir a leitura do texto */
+.hero-hist__overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(10, 6, 8, 0.2) 0%, rgba(10, 6, 8, 0.8) 100%);
+  z-index: 1;
+}
+
+.hero-hist__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem; /* Compensa o espaço da navbar */
+  
+  /* Animação suave de entrada ao carregar a página */
+  animation: fadeUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Tipografia ── */
+
+.hero-hist__pretitle {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hero-hist__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 5rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  
+  /* A MESMA MÁSCARA DE OURO DO INDEX */
+  background: url('../images/textura-ouro.jpg') center/cover no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+  
+  /* Sombra para destacar as bordas da letra dourada no fundo escuro */
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.9)) drop-shadow(0px 0px 30px rgba(201, 168, 76, 0.2));
+}
+
+.hero-hist__subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  color: #9c7257;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* Reduz o botão levemente caso queira exatamente a proporção da imagem */
+.hero-hist__content .hero__cta {
+  padding: 1rem 3.5rem;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+/* ══════════════════════════════════════════
+   LINHA DO TEMPO DA HISTÓRIA
+══════════════════════════════════════════ */
+
+.timeline-section {
+  background-color: var(--color-black);
+  padding: 6rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
+}
+
+.timeline-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+/* ── A Linha Vertical Mágica ── */
+.timeline__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px; 
+  width: 2px;
+  background: linear-gradient(
+    to bottom, 
+    rgba(192, 132, 252, 0.0) 0%,   /* Transparente no topo */
+    rgba(192, 132, 252, 0.8) 15%,  /* Fica sólido rapidamente */
+    rgba(192, 132, 252, 0.8) 85%,  /* Mantém sólido quase até o final */
+    rgba(192, 132, 252, 0.0) 100%  /* Transparente na base */
+  );
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.4);
+  z-index: 0;
+}
+
+/* ── O Item da Timeline ── */
+.timeline__item {
+  display: grid;
+  grid-template-columns: 50px 1.2fr 0.85fr;
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+  align-items: start;
+  padding-bottom: 4rem;
+}
+
+.timeline__item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: calc(50px + 3rem);
+  right: 0;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.15);
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline__item:last-child::after {
+  display: none;
+}
+
+/* ── Os Nós (Bolinhas com os ícones) ── */
+.timeline__node {
+  width: 50px;
+  height: 50px;
+  margin-top: 0.2rem;
+  background: var(--color-dark);
+  border: 1.5px solid var(--color-purple-glow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline__node::before,
+.timeline__node::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-purple-glow);
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.timeline__node::before { top: -6px; }
+.timeline__node::after { bottom: -6px; }
+
+.timeline__node img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* ── Textos ── */
+.timeline__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeline__date {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: #a476c8;
+  letter-spacing: 0.1em;
+}
+
+.timeline__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.timeline__text p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-white-dim);
+  margin-bottom: 1rem;
+}
+.timeline__text p:last-child { margin-bottom: 0; }
+
+/* ── Área de Mídia (Imagens da Direita) ── */
+.timeline__media {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  justify-self: end;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline__media::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%, 
+    rgba(0, 0, 0, 0.4) 65%, 
+    #000000 95%, 
+    #000000 100%
+  );
+}
+
+.timeline__media img {
+  border-radius: 4px;
+  position: relative;
+  z-index: 0;
+  transition: transform var(--transition-smooth);
+}
+
+/* Variação 1: Imagem Única Padrão */
+.media-single img {
+  width: 100%;
+  max-width: 95%;
+  max-height: 320px;
+  object-fit: cover;
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 50%, black 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 50%, black 60%, transparent 100%);
+}
+
+.timeline__item:hover .media-single img {
+  border-color: rgba(201, 168, 76, 0.5);
+}
+
+/* Variação 2: Imagem Composta (Seu design pré-montado) */
+.media-composed img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 50%, black 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 50%, black 60%, transparent 100%);
+}
+
+/* ── Animações de Scroll ── */
+.fade-in-scroll {
+  /* opacity: 0; */
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsividade Básica para Celulares */
+@media (max-width: 900px) {
+  .timeline__item {
+    grid-template-columns: 50px 1fr; 
+  }
+  .timeline__line { left: 24px; }
+  .timeline__node { width: 50px; height: 50px; }
+  
+  .timeline__media {
+    grid-column: 2; 
+    margin-top: -1rem;
+  }
+}
+
+/* ══════════════════════════════════════════
+   FOOTER (FINAL DA PÁGINA)
+══════════════════════════════════════════ */
+.footer-historia {
+  width: 100%;
+  max-width: 1920px;
+  aspect-ratio: 1920 / 440;
+  min-height: 280px; /* Trava de segurança para não sumir no mobile */
+  margin: 0 auto;
+  position: relative;
+  background: var(--color-black) url('../images/footer-bg.jpg') center / 100% 100% no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Joga o bloco de conteúdo para o lado direito */
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  overflow: hidden;
+}
+
+.footer-historia__content {
+  width: 55%; /* Limita o conteúdo à metade direita */
+  padding-right: 8%; /* Margem de respiro na borda direita */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.footer-historia__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.9);
+}
+
+.footer-historia__text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--color-white-dim);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* ── Botão Temático Roxo ── */
+.footer-historia__cta {
+  position: relative;
+  padding: 1.2rem 3rem;
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F5F0E8;
+  text-shadow: 0 0 10px rgba(245, 240, 232, 0.4);
+  
+  /* Borda usando a paleta roxa rúnica */
+  background: linear-gradient(90deg, var(--color-purple-mid), var(--color-purple-vivid), var(--color-purple-mid));
+  clip-path: polygon(1.2rem 0, calc(100% - 1.2rem) 0, 100% 50%, calc(100% - 1.2rem) 100%, 1.2rem 100%, 0 50%);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, filter 0.3s ease;
+  z-index: 1;
+}
+
+.footer-historia__cta::before {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px; right: 2px; bottom: 2px; 
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-purple-deep) 100%);
+  clip-path: polygon(calc(1.2rem - 1px) 0, calc(100% - (1.2rem - 1px)) 0, 100% 50%, calc(100% - (1.2rem - 1px)) 100%, calc(1.2rem - 1px) 100%, 0 50%);
+  z-index: -1;
+}
+
+.footer-historia__cta:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+/* Responsividade Básica para o Footer */
+@media (max-width: 900px) {
+  .footer-historia {
+    justify-content: center;
+    aspect-ratio: auto; 
+    background: var(--color-black) url('../images/footer-bg.jpg') left center / cover no-repeat;
+  }
+  .footer-historia__content {
+    width: 90%;
+    padding-right: 0;
+    /* Adiciona um fundo escuro desfocado no mobile para garantir leitura sobre o selo */
+    background: rgba(10, 6, 8, 0.8);
+    padding: 2rem;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(139, 47, 201, 0.3);
+  }
+}
+
+/* ══════════════════════════════════════════
+   SEÇÃO: O INÍCIO DA HISTÓRIA
+══════════════════════════════════════════ */
+
+.inicio-historia {
+  padding: 8rem 2rem;
+  background-color: var(--color-black);
+  border-top: 1px solid rgba(201, 168, 76, 0.15); /* Separador sutil de seção */
+}
+
+.inicio-historia__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.inicio-historia__main-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  
+  /* Máscara de Ouro */
+  background: url('../images/textura-ouro.jpg') center/cover no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.9)) drop-shadow(0px 0px 30px rgba(201, 168, 76, 0.2));
+
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+}
+
+/* Grid de 3 Colunas (Texto - Imagem - Texto) */
+.inicio-historia__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.inicio-historia__col {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* O Item de Texto com Algarismo Romano */
+.inicio-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.inicio-item__circle {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0; /* Impede que o círculo amasse */
+  border: 1px solid var(--color-gold);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-display);
+  color: var(--color-gold);
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: var(--color-dark);
+  box-shadow: 0 0 15px rgba(201, 168, 76, 0.2);
+}
+
+.inicio-item__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.inicio-item__content p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-white-dim);
+}
+
+/* Coluna Central - Thorin */
+.inicio-historia__center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inicio-historia__hero-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: -2rem;
+  /* Efeito de fusão com o fundo preto (Fade-out/Blur) */
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+.inicio-historia__hero-title {
+  position: relative;
+  z-index: 10; /* Garante que fique à frente da imagem */
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  
+  /* Máscara de Ouro */
+  background: url('../images/textura-ouro.jpg') center/cover no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+  
+  /* Sombras para dar profundidade e legibilidade contra o fundo escuro */
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.9)) drop-shadow(0px 0px 30px rgba(201, 168, 76, 0.2));
+}
+
+.inicio-historia__hero-desc {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-white-dim);
+  max-width: 85%;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .inicio-historia__grid {
+    grid-template-columns: 1fr; /* Muda para coluna única no tablet/celular */
+    gap: 5rem;
+  }
+  .inicio-historia__center {
+    order: -1; /* Joga o Thorin para o topo da lista no celular */
+  }
+}
+
+/* Classe para aplicar textura de ouro em textos isolados */
+.gold-text-mask {
+  background: url('../images/textura-ouro.jpg') center/cover no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.8));
+}

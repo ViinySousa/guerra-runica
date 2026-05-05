@@ -28,7 +28,7 @@
     </div>
 
     <nav class="navbar__nav">
-      <a href="#historia" class="navbar__link">A História</a>
+      <a href="historia.html" class="navbar__link">A História</a>
       <a href="#Personagens" class="navbar__link">Personagens</a>
       <a href="#Missões" class="navbar__link">Missões</a>
       <a href="#mestre"   class="navbar__link">Guia do Mestre</a>
@@ -50,7 +50,7 @@
   ═══════════════════════════════════ -->
   <section class="hero" id="hero">
 
-    <!-- Imagem de fundo — coloque sua arte em images/hero-bg.jpg -->
+    <!-- Video de fundo -->
     <div class="hero__bg">
       <video autoplay muted loop playsinline class="hero__bg-video">
         <source src="video/video-hero.mp4" type="video/mp4">
@@ -86,9 +86,9 @@
         A escuridão não espera por heróis.
       </p>
 
-      <button class="hero__cta" id="btnCarta">
-        Ler a Mensagem
-      </button>
+      <a href="historia.html" class="hero__cta">
+        Start
+      </a>
     </div>
   
     <button id="btnAudioToggle" class="hero__audio-btn" aria-label="Ativar ou desativar som ambiente">
@@ -105,16 +105,6 @@
     
 
   </section>
-
-  <div class="modal" id="modalCarta" role="dialog" aria-modal="true">
-    <div class="modal__backdrop" id="modalBackdrop"></div>
-    
-    <div class="modal__container">
-      <button class="modal__close" id="modalClose" aria-label="Fechar">✕</button>
-      <img src="images/carta-bg.jpeg" alt="Carta de Thorin" class="modal__image">
-      
-      </div>
-  </div>
 
   <!-- JS -->
   <script src="js/hero.js"></script>
